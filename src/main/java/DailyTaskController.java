@@ -1,5 +1,6 @@
 import tasks.TaskBase;
 import tasks.list.MyLinkedList;
+import tasks.status.TaskStatus;
 
 public class DailyTaskController {
     MyLinkedList<TaskBase> myTasks = new MyLinkedList<TaskBase>();
@@ -23,7 +24,9 @@ public class DailyTaskController {
     public int getTotalScoreForAllFinishedTasks() {
         int score = 0;
         for (TaskBase task: myTasks) {
-            score += task.getScore();
+            if (task.status== TaskStatus.FINISHED){
+                score += task.getScore();
+            }
         }
        return score;
     }

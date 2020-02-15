@@ -27,22 +27,43 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     public boolean remove(T task) {
-        first = null;
-
-        return true;
+        if (first == null) {
+            return true;
+        }
+        MyLinkedListElement<T> currentElement = first;
+        MyLinkedListElement<T> previousElement = null;
+        do {
+            if (task == currentElement.getElement()) {
+                if (currentElement == first) {
+                    first = currentElement.getNext();
+                    return true;
+                }
+                if (currentElement == last) {
+                    last = previousElement;
+                    previousElement.setNext(null);
+                    return true;
+                }
+                previousElement.setNext(currentElement.getNext());
+                return true;
+            }
+            previousElement = currentElement;
+            currentElement = currentElement.getNext();
+        } while (currentElement != null);
+        return false;
     }
 
     public boolean contains(T task) {
-        MyLinkedListElement<T> elementOnList = first;
+        if (first == null) {
+            return false;
+        }
+        MyLinkedListElement<T> currentElementOnList = first;
         do {
-            if (first==null){
-                return false;
-            }else if (task == elementOnList.getElement()) {
+            if (task == currentElementOnList.getElement()) {
                 return true;
             } else {
-                elementOnList = elementOnList.getNext();
+                currentElementOnList = currentElementOnList.getNext();
             }
-        } while (elementOnList != null);
+        } while (currentElementOnList != null);
         return false;
     }
 
@@ -53,17 +74,20 @@ public class MyLinkedList<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            //SOMETHING TO ADD HERE?
+            MyLinkedListElement<T> currentElement = first;
 
             @Override
             public boolean hasNext() {
-                //TODO CHANGE THIS
-                return false;
+                return currentElement != null;
             }
 
             @Override
             public T next() {
-                //TODO CHANGE THIS
+                if (hasNext()) {
+                    T element = currentElement.getElement();
+                    currentElement = currentElement.getNext();
+                    return element;
+                }
                 return null;
             }
         };
