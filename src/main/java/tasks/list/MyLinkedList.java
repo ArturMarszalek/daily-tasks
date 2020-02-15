@@ -27,6 +27,7 @@ public class MyLinkedList<T> implements Iterable<T> {
 
     }
 
+
     public boolean remove(T task) {
         MyLinkedListElement<T> currentElement = first;
         MyLinkedListElement<T> previousElement = null;

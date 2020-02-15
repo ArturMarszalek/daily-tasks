@@ -1,3 +1,4 @@
+import tasks.EasyTask;
 import tasks.TaskBase;
 import tasks.list.MyLinkedList;
 
