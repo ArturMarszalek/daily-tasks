@@ -32,9 +32,18 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     public boolean contains(T task) {
-        while (last.getNext() != null){
-            last = last.getNext();
+        MyLinkedListElement<T> elemntOnList = first;
+        if (first != null) {
+            do {
+                if (task == elemntOnList.getElement()) {
+                    return true;
+                } else {
+                    elemntOnList = elemntOnList.getNext();
+                }
+            } while (elemntOnList.getNext() != null);
+            return false;
         }
+        return false;
     }
 
     public T get(int index) {
@@ -44,16 +53,19 @@ public class MyLinkedList<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            //SOMETHING TO ADD HERE?
+            MyLinkedListElement<T> currentElement = first;
             @Override
             public boolean hasNext() {
-                //TODO CHANGE THIS
-                return false;
+                return currentElement != null;
             }
 
             @Override
             public T next() {
-                //TODO CHANGE THIS
+                if(hasNext()){
+                    T element = currentElement.getElement();
+                    currentElement = currentElement.getNext();
+                    return element;
+                }
                 return null;
             }
         };
