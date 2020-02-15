@@ -19,13 +19,16 @@ class DailyTaskControllerTest {
     void shouldAddTask() {
         //given
         EasyTask eatBreakfast = new EasyTask("zjedz sniadanko");
+        EasyTask eatObiad = new EasyTask("zjedz obiad");
 
         //when
         DailyTaskController dailyTaskController = new DailyTaskController();
         dailyTaskController.add(eatBreakfast);
+        dailyTaskController.add(eatObiad);
         //then
-        assertTrue(dailyTaskController.contains(eatBreakfast));
+        assertTrue(dailyTaskController.contains(eatObiad));
     }
+
 
     @Test
     void shouldRemoveTask() {
