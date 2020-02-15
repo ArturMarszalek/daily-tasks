@@ -1,17 +1,31 @@
 package tasks.list;
 
 import java.util.Iterator;
-import java.util.LinkedList;
-//TO START -> UNCOMMENT THIS
+
 public class MyLinkedList<T> implements Iterable<T> {
-//AND -> COMMENT THIS
-//public class MyLinkedList<T> extends LinkedList<T> {
+
     private MyLinkedListElement<T> first;
     private MyLinkedListElement<T> last;
+    MyLinkedListElement<T> currentElement = null;
+    boolean initialize = true;
 
-//UNCOMMENT BELOW
     public boolean add(T task) {
-        return false;
+        MyLinkedListElement newElement = new MyLinkedListElement(task);
+
+        if (first == null) {
+
+            first = newElement;
+            last = newElement;
+        } else {
+            if (first == last) {
+                first.setNext(newElement);
+                last = newElement;
+            } else {
+                last.setNext(newElement);
+                last = newElement;
+            }
+        }
+        return true;
     }
 
     public void add(int index, T taskBase) {
@@ -23,6 +37,18 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     public boolean contains(T task) {
+
+        if (first == null) {
+            return false;
+        }
+        MyLinkedListElement<T> currentElement = first;
+        do {
+            if (task == currentElement.getElement()) {
+                return true;
+            } else {
+                currentElement = currentElement.getNext();
+            }
+        } while (currentElement != null);
         return false;
     }
 
@@ -32,19 +58,33 @@ public class MyLinkedList<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-       return new Iterator<T>() {
-             //SOMETHING TO ADD HERE?
-           @Override
-           public boolean hasNext() {
-               //TODO CHANGE THIS
-               return false;
-           }
+        return new Iterator<T>() {
 
-           @Override
-           public T next() {
-               //TODO CHANGE THIS
-               return null;
-           }
-       };
+            //SOMETHING TO ADD HERE?
+//            MyLinkedListElement<T> currentElement = first;
+            @Override
+            public boolean hasNext() {
+
+                if (initialize == true) {
+                    currentElement = first;
+                    initialize = false;
+                }
+                if (currentElement == null) {
+                    initialize=true;
+                    return false;
+                }
+
+                return true;
+
+            }
+
+            @Override
+            public T next() {
+                //TODO CHANGE THIS
+                MyLinkedListElement<T> temp = currentElement;
+                currentElement = currentElement.getNext();
+                return temp.getElement();
+            }
+        };
     }
 }

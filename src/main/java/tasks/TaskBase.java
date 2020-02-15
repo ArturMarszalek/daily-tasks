@@ -1,6 +1,8 @@
 package tasks;
 
-public abstract class TaskBase {
+import tasks.list.MyLinkedListElement;
+
+public abstract class TaskBase{
     public TaskBase(String description) {
         this.description = description;
     }
