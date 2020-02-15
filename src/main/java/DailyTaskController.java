@@ -1,11 +1,16 @@
 import tasks.TaskBase;
 import tasks.list.MyLinkedList;
+import tasks.status.TaskStatus;
 
 public class DailyTaskController {
 
     MyLinkedList<TaskBase> myTasks = new MyLinkedList<TaskBase>();
 
     public void add(TaskBase task) {
+        myTasks.add(task);
+    }
+
+    public void add(TaskBase task, TaskStatus taskStatus) {
         myTasks.add(task);
     }
 
@@ -24,7 +29,7 @@ public class DailyTaskController {
     public int getTotalScoreForAllFinishedTasks() {
         int score = 0;
         for (TaskBase task: myTasks) {
-            score += task.getScore();
+            score += task.getFinishedScore();
         }
        return score;
     }
