@@ -32,9 +32,27 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     public boolean remove(T task) {
+        MyLinkedListElement<T> currentElement = first;
+        MyLinkedListElement<T> previousElement = null;
+        do {
+            if (task == currentElement.getElement()) {
+                if (currentElement == first) {
+                    first = currentElement.getNext();
+                    return true;
+                }
+                if (currentElement == last) {
+                    last = previousElement;
+                    previousElement.setNext(null);
+                    return true;
+                }
+                previousElement.setNext(currentElement.getNext());
+                return true;
+            }
+            previousElement = currentElement;
+            currentElement = currentElement.getNext();
+        } while (currentElement != null);
         return false;
     }
-
     public boolean contains(T task) {
 
         if (first == null) {
@@ -55,26 +73,9 @@ public class MyLinkedList<T> implements Iterable<T> {
         return null;
     }
 
-//    public Iterator<T> iterator() {
-//        return new Iterator<T>() {
-//            MyLinkedListElement<T> nextElement = first;
-//            @Override
-//            public boolean hasNext() {
-//                return nextElement != last.getNext();
-//            }
-//            @Override
-//            public T next() {
-//                T element = nextElement.getElement();
-//                nextElement = nextElement.getNext();
-//                return element;
-//            }
-//        };
-//    }
-
 
     @Override
     public Iterator<T> iterator() {
-
 
         return new Iterator<T>() {
 
@@ -82,10 +83,8 @@ public class MyLinkedList<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                if (currentElement == null) {
-                    return false;
-                }
-                return true;
+
+                return currentElement != null;
             }
 
             @Override

@@ -22,4 +22,6 @@ public class MyLinkedListElement<T> {
     public void setNext(MyLinkedListElement<T> next) {
         this.next = next;
     }
+
+
 }
