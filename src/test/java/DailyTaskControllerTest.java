@@ -15,6 +15,8 @@ class DailyTaskControllerTest {
         dailyTaskController = new DailyTaskController();
     }
 
+
+
     @Test
     void shouldAddTask() {
         //given
@@ -26,12 +28,44 @@ class DailyTaskControllerTest {
         //then
         assertTrue(dailyTaskController.contains(eatBreakfast));
     }
+    @Test
+    void shouldAddThreeTask() {
+        //given
+        EasyTask eatBreakfast = new EasyTask("zjedz sniadanko");
+        EasyTask eatSeconBreakfast = new EasyTask("zjedz drugie sniadanie");
+        EasyTask eatDinner = new EasyTask("zjedz obiad");
+
+        //when
+        DailyTaskController dailyTaskController = new DailyTaskController();
+        dailyTaskController.add(eatBreakfast);
+        dailyTaskController.add(eatSeconBreakfast);
+        dailyTaskController.add(eatDinner);
+        //then
+        assertTrue(dailyTaskController.contains(eatSeconBreakfast));
+    }
 
     @Test
     void shouldRemoveTask() {
         //given
         EasyTask eatBreakfast = new EasyTask("zjedz sniadanko");
         dailyTaskController.add(eatBreakfast);
+        assertTrue(dailyTaskController.contains(eatBreakfast));
+        //when
+        dailyTaskController.remove(eatBreakfast);
+        //then
+        assertFalse(dailyTaskController.contains(eatBreakfast));
+    }
+    @Test
+    void shouldRemoveTaskfromBiggerLinkedList() {
+        //given
+        EasyTask eatBreakfast = new EasyTask("zjedz sniadanko");
+        EasyTask eatSeconBreakfast = new EasyTask("zjedz drugie sniadanie");
+        EasyTask eatDinner = new EasyTask("zjedz obiad");
+
+        DailyTaskController dailyTaskController = new DailyTaskController();
+        dailyTaskController.add(eatBreakfast);
+        dailyTaskController.add(eatSeconBreakfast);
+        dailyTaskController.add(eatDinner);
         assertTrue(dailyTaskController.contains(eatBreakfast));
         //when
         dailyTaskController.remove(eatBreakfast);
