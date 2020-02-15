@@ -16,19 +16,7 @@ class DailyTaskControllerTest {
     }
 
     @Test
-    void shouldAddTask() {
-        //given
-        EasyTask eatBreakfast = new EasyTask("zjedz sniadanko");
-
-        //when
-        DailyTaskController dailyTaskController = new DailyTaskController();
-        dailyTaskController.add(eatBreakfast);
-        //then
-        assertTrue(dailyTaskController.contains(eatBreakfast));
-    }
-
-    @Test
-    void shouldRemoveTask() {
+    void shouldRemoveTaskAtFirstPosition() {
         //given
         EasyTask eatBreakfast = new EasyTask("zjedz sniadanko");
         dailyTaskController.add(eatBreakfast);
@@ -38,35 +26,29 @@ class DailyTaskControllerTest {
         //then
         assertFalse(dailyTaskController.contains(eatBreakfast));
     }
-
     @Test
-    void shouldAddTaskAtSpecificPlace() {
+    void shouldRemoveTaskInTheMiddle() {
         //given
         EasyTask eatBreakfast = new EasyTask("zjedz sniadanko");
+        EasyTask eatLunch = new MediumTask("zjedz obiad");
+        EasyTask doNotSleep = new HardTask("nie spij 24 godziny");
         dailyTaskController.add(eatBreakfast);
-        EasyTask eatDinner = new EasyTask("zjedz kolacje");
+        dailyTaskController.add(eatLunch);
+        dailyTaskController.add(doNotSleep);
+        //when
+        dailyTaskController.remove(eatLunch);
+        //then
+        assertFalse(dailyTaskController.contains(eatLunch));
+    }
+    @Test
+    void shouldRemoveTaskAtLastPosition() {
+        //given
+        EasyTask eatBreakfast = new EasyTask("zjedz sniadanko");
+        EasyTask eatDinner = new MediumTask("zjedz kolacje");
+        dailyTaskController.add(eatBreakfast);
         dailyTaskController.add(eatDinner);
-
-        EasyTask eatLunch = new EasyTask("zjedz obiad");
         //when
-        dailyTaskController.add(1, eatLunch);
+        dailyTaskController.remove(eatDinner);
         //then
-        assertSame(eatLunch, dailyTaskController.getAt(1));
-    }
-
-    @Test
-    void shouldCountAllPointsForFinishedTasks() {
-        //given
-        EasyTask eatBreakfast = new EasyTask("zjedz sniadanko");
-        EasyTask doNotEatSweets = new MediumTask("nie jedz słodyczy");
-        EasyTask doExercises = new HardTask("idz na silke");
-        dailyTaskController.add(eatBreakfast);
-        dailyTaskController.add(doNotEatSweets);
-        dailyTaskController.add(doExercises);
-
-        //when
-        int totalScoreForAllFinishedTasks = dailyTaskController.getTotalScoreForAllFinishedTasks();
-        //then
-        assertEquals(30, totalScoreForAllFinishedTasks);
-    }
-}
+        assertFalse(dailyTaskController.contains(eatDinner));
+    }}
