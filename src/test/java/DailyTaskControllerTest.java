@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import tasks.EasyTask;
 import tasks.HardTask;
 import tasks.MediumTask;
+import tasks.status.TaskStatus;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -106,5 +107,18 @@ class DailyTaskControllerTest {
         dailyTaskController.remove(eatDinner);
         //then
         assertFalse(dailyTaskController.contains(eatDinner));
+    }
+
+    @Test
+    void shouldCountByStatus(){
+        EasyTask eatBreakfast = new EasyTask("zjedz sniadanko");
+        EasyTask eatDinner = new MediumTask("zjedz kolacje");
+        dailyTaskController.add(eatBreakfast);
+        dailyTaskController.add(eatDinner);
+        eatBreakfast.setStatus(TaskStatus.FINISHED);
+        eatDinner.setStatus(TaskStatus.FINISHED);
+
+
+        assertEquals(15, dailyTaskController.getTotalScoreForAllFinishedTasks());
     }
 }
