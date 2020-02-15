@@ -2,15 +2,22 @@ package tasks.list;
 
 import java.util.Iterator;
 import java.util.LinkedList;
-//TO START -> UNCOMMENT THIS
+
 public class MyLinkedList<T> implements Iterable<T> {
-//AND -> COMMENT THIS
-//public class MyLinkedList<T> extends LinkedList<T> {
+
+    //public class MyLinkedList<T> extends LinkedList<T> {
     private MyLinkedListElement<T> first;
     private MyLinkedListElement<T> last;
 
-//UNCOMMENT BELOW
     public boolean add(T task) {
+        MyLinkedListElement<T> newElement = new MyLinkedListElement<>(task);
+        if (first == null) {
+            first = newElement;
+            last = newElement;
+        } else {
+            last.setNext(newElement);
+            last = newElement;
+        }
         return false;
     }
 
@@ -23,8 +30,20 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     public boolean contains(T task) {
+        if (first == null) {
+            return false;
+        }
+        MyLinkedListElement<T> currentElement = first;
+        do {
+            if (task == currentElement.getElement()) {
+                return true;
+            } else {
+                currentElement = currentElement.getNext();
+            }
+        } while (currentElement != null);
         return false;
     }
+
 
     public T get(int index) {
         return null;
@@ -32,19 +51,32 @@ public class MyLinkedList<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-       return new Iterator<T>() {
-             //SOMETHING TO ADD HERE?
-           @Override
-           public boolean hasNext() {
-               //TODO CHANGE THIS
-               return false;
-           }
+        return new Iterator<T>() {
+            //SOMETHING TO ADD HERE?
+            MyLinkedListElement<T> current = null;
+            boolean firstWasSet = false;
 
-           @Override
-           public T next() {
-               //TODO CHANGE THIS
-               return null;
-           }
-       };
+            @Override
+            public boolean hasNext() {
+                //TODO CHANGE THIS
+                if(first != null && !firstWasSet) {
+                    return true;
+                }
+                return current != null && current.getNext() != null;
+
+            }
+
+            @Override
+            public T next() {
+                if (current == null){
+                    current = first;
+                    firstWasSet = true;
+                    return current.getElement();
+                } else {
+                    current = current.getNext();
+                    return current.getElement();
+                }
+            }
+        };
     }
 }
