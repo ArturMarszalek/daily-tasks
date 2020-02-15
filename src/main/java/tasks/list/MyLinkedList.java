@@ -1,7 +1,6 @@
 package tasks.list;
 
 import java.util.Iterator;
-import java.util.LinkedList;
 
 public class MyLinkedList<T> implements Iterable<T> {
 
@@ -45,17 +44,18 @@ public class MyLinkedList<T> implements Iterable<T> {
             first = null;
             last = null;
 
-        }else{
-        do {
-            if (task == elemntOnList.getNextElement().getElement() && elemntOnList.getNextElement() != last) {
-                elemntOnList.setNextElement(elemntOnList.getNextElement().getNextElement());
-            } else {
-                elemntOnList.setNextElement(null);
-                last = elemntOnList;
-            }
+        } else {
+            do {
+                if (task == elemntOnList.getNextElement().getElement() && elemntOnList.getNextElement() != last) {
+                    elemntOnList.setNextElement(elemntOnList.getNextElement().getNextElement());
+                } else {
+                    elemntOnList.setNextElement(null);
+                    last = elemntOnList;
+                }
 
 
-        } while (elemntOnList.getNextElement() != null);}
+            } while (elemntOnList.getNextElement() != null);
+        }
 
         return false;
     }
@@ -83,17 +83,19 @@ public class MyLinkedList<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            //SOMETHING TO ADD HERE?
-            @Override
-            public boolean hasNext() {
-                //TODO CHANGE THIS
-                return false;
-            }
+            MyLinkedListElement<T> nextElement = first;
 
             @Override
+            public boolean hasNext() {
+                return nextElement != last.getNextElement();
+
+            }
+            @Override
             public T next() {
-                //TODO CHANGE THIS
-                return null;
+                T element = nextElement.getElement();
+                nextElement = nextElement.getNextElement();
+
+                return element;
             }
         };
     }
