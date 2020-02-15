@@ -1,7 +1,8 @@
 package tasks.list;
 
-import jdk.nashorn.internal.ir.LiteralNode;
+//import jdk.nashorn.internal.ir.LiteralNode;
 
+import javax.swing.*;
 import java.util.Iterator;
 
 public class MyLinkedList<T> implements Iterable<T> {
@@ -64,15 +65,25 @@ public class MyLinkedList<T> implements Iterable<T> {
     public Iterator<T> iterator() {
         return new Iterator<T>() {
 
+            MyLinkedListElement<T> currentScore = first;
+
             @Override
+
             public boolean hasNext() {
-                return false;
+                if(currentScore == null)
+                    return false;
+
+                return currentScore != last.getNext();
             }
 
             @Override
+
             public T next() {
-                return null;
+                T element = currentScore.getElement();
+                currentScore = currentScore.getNext();
+                return element;
             }
         };
     }
 }
+
