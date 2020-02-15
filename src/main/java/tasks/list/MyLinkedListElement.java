@@ -6,6 +6,15 @@ import java.util.LinkedList;
 public class MyLinkedListElement<T> {
     private T element;
     private MyLinkedListElement<T> next;
+    private MyLinkedListElement<T> previous;
+
+    public MyLinkedListElement<T> getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(MyLinkedListElement<T> previous) {
+        this.previous = previous;
+    }
 
     public MyLinkedListElement<T> getNext() {
         return next;
