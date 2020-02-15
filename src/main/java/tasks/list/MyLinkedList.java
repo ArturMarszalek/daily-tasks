@@ -1,5 +1,7 @@
 package tasks.list;
 
+import jdk.nashorn.internal.ir.LiteralNode;
+
 import java.util.Iterator;
 
 public class MyLinkedList<T> implements Iterable<T> {
@@ -7,8 +9,6 @@ public class MyLinkedList<T> implements Iterable<T> {
     // public class MyLinkedList<T extends TaskBase> extends LinkedList<T> {
     private MyLinkedListElement<T> first;
     private MyLinkedListElement<T> last;
-
-    public boolean hasNext;
 
     public MyLinkedListElement<T> getFirst() {
         return first;
@@ -63,16 +63,14 @@ public class MyLinkedList<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            //SOMETHING TO ADD HERE?
+
             @Override
             public boolean hasNext() {
-                //TODO CHANGE THIS
                 return false;
             }
 
             @Override
             public T next() {
-                //TODO CHANGE THIS
                 return null;
             }
         };
