@@ -16,17 +16,14 @@ public class MyLinkedList<T> implements Iterable<T> {
             first = listOfElements;
             last = listOfElements;
         } else {
-            this.last.setNext(listOfElements);
+            last.setNext(listOfElements);
             last = listOfElements;
         }
         return false;
     }
 
     public void add(int index, T taskBase) {
-
-
-
-    }
+        }
 
     public boolean remove(T task) {
         return false;
@@ -56,17 +53,19 @@ public class MyLinkedList<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
        return new Iterator<T>() {
-             //SOMETHING TO ADD HERE?
+             MyLinkedListElement nextElement = first;
+
            @Override
            public boolean hasNext() {
-               //TODO CHANGE THIS
-               return false;
+
+               return nextElement != last.getNext();
            }
 
            @Override
            public T next() {
-               //TODO CHANGE THIS
-               return null;
+               T element = (T) nextElement.getElement();
+               nextElement = nextElement.getNext();
+               return element;
            }
        };
     }

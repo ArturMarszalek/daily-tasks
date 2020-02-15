@@ -1,5 +1,8 @@
 package tasks.list;
 
+
+import java.util.LinkedList;
+
 public class MyLinkedListElement<T> {
     private T element;
     private MyLinkedListElement<T> next;
