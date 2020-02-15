@@ -69,4 +69,14 @@ class DailyTaskControllerTest {
         //then
         assertEquals(30, totalScoreForAllFinishedTasks);
     }
+
+    @Test
+    void shouldCountAllPointsForFinishedTasksEmptyList() {
+        //given
+
+        //when
+        int totalScoreForAllFinishedTasks = dailyTaskController.getTotalScoreForAllFinishedTasks();
+        //then
+        assertEquals(0, totalScoreForAllFinishedTasks);
+    }
 }

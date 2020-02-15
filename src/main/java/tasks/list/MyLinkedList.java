@@ -6,8 +6,7 @@ public class MyLinkedList<T> implements Iterable<T> {
 
     private MyLinkedListElement<T> first;
     private MyLinkedListElement<T> last;
-    MyLinkedListElement<T> currentElement = null;
-    boolean initialize = true;
+
 
     public boolean add(T task) {
         MyLinkedListElement newElement = new MyLinkedListElement(task);
@@ -56,31 +55,41 @@ public class MyLinkedList<T> implements Iterable<T> {
         return null;
     }
 
+//    public Iterator<T> iterator() {
+//        return new Iterator<T>() {
+//            MyLinkedListElement<T> nextElement = first;
+//            @Override
+//            public boolean hasNext() {
+//                return nextElement != last.getNext();
+//            }
+//            @Override
+//            public T next() {
+//                T element = nextElement.getElement();
+//                nextElement = nextElement.getNext();
+//                return element;
+//            }
+//        };
+//    }
+
+
     @Override
     public Iterator<T> iterator() {
+
+
         return new Iterator<T>() {
 
-            //SOMETHING TO ADD HERE?
-//            MyLinkedListElement<T> currentElement = first;
+            MyLinkedListElement<T> currentElement = first;
+
             @Override
             public boolean hasNext() {
-
-                if (initialize == true) {
-                    currentElement = first;
-                    initialize = false;
-                }
                 if (currentElement == null) {
-                    initialize=true;
                     return false;
                 }
-
                 return true;
-
             }
 
             @Override
             public T next() {
-                //TODO CHANGE THIS
                 MyLinkedListElement<T> temp = currentElement;
                 currentElement = currentElement.getNext();
                 return temp.getElement();

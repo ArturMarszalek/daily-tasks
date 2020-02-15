@@ -13,8 +13,10 @@ public class Main {
         for (MyLinkedListElement myLinkedListElement : myLinkedList) {
             System.out.println(myLinkedListElement);
         }
-
-
+        System.out.println("-----------");
+        for (MyLinkedListElement myLinkedListElement : myLinkedList) {
+            System.out.println(myLinkedListElement);
+        }
 //        System.out.println(myLinkedList.iterator().hasNext());
 //        System.out.println(myLinkedList.iterator().next());
 //        System.out.println(myLinkedList.iterator().next());
