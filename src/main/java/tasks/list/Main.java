@@ -7,20 +7,20 @@ public class Main {
 
 
         MyLinkedList<MyLinkedListElement> myLinkedList = new MyLinkedList();
-        MyLinkedListElement el1= new MyLinkedListElement(new EasyTask("11"));
-        MyLinkedListElement el2= new MyLinkedListElement(new EasyTask("12"));
-        MyLinkedListElement el3= new MyLinkedListElement(new EasyTask("13"));
-        MyLinkedListElement el4= new MyLinkedListElement(new EasyTask("14"));
+        MyLinkedListElement element1= new MyLinkedListElement(new EasyTask("11"));
+        MyLinkedListElement element2= new MyLinkedListElement(new EasyTask("12"));
+        MyLinkedListElement element3= new MyLinkedListElement(new EasyTask("13"));
+        MyLinkedListElement element4= new MyLinkedListElement(new EasyTask("14"));
 
 
-//        myLinkedList.add(el1);
-        myLinkedList.add(el2);
-        myLinkedList.add(el3);
-//        myLinkedList.add(el4);
+//        myLinkedList.add(element1);
+        myLinkedList.add(element2);
+        myLinkedList.add(element3);
+//        myLinkedList.add(element4);
 
         iterate(myLinkedList);
 
-        myLinkedList.remove(el3);
+        myLinkedList.remove(element3);
 
         System.out.println("--------------");
         iterate(myLinkedList);

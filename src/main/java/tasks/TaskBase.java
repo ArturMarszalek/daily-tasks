@@ -1,5 +1,6 @@
 package tasks;
 
+import lombok.Getter;
 import tasks.list.MyLinkedListElement;
 import tasks.status.TaskStatus;
 
@@ -16,6 +17,7 @@ public abstract class TaskBase {
         this.description = description;
     }
 
+    @Getter
     public String description;
 
     protected abstract int getScore();
@@ -27,9 +29,9 @@ public abstract class TaskBase {
         return 0;
     }
 
-    public String getDescription() {
-        return description;
-    }
+//    public String getDescription() {
+//        return description;
+//    }
 
     public TaskStatus getStatus() {
         return status;

@@ -70,7 +70,7 @@ class DailyTaskControllerTest {
         //when
         int totalScoreForAllFinishedTasks = dailyTaskController.getTotalScoreForAllFinishedTasks();
         //then
-        assertEquals(30, totalScoreForAllFinishedTasks);
+        assertEquals(0, totalScoreForAllFinishedTasks);
     }
 
     @Test

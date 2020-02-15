@@ -28,7 +28,27 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     public void add(int index, T taskBase) {
+        MyLinkedListElement<T> elementToAdd = new MyLinkedListElement<>(taskBase);
 
+        if (index == 0) {
+            MyLinkedListElement<T> nextElement = getElementAt(index);
+            elementToAdd.setNext(nextElement);
+            first = elementToAdd;
+        }
+    }
+
+    private MyLinkedListElement<T> getElementAt(int index) {
+        int currentIndex = 0;
+        MyLinkedListElement<T> current = first;
+        while (current != null) {
+            if (currentIndex == index) {
+                return current;
+            }
+            current = current.getNext();
+            currentIndex++;
+
+        }
+        return null;
     }
 
     public boolean remove(T task) {
@@ -53,6 +73,21 @@ public class MyLinkedList<T> implements Iterable<T> {
         } while (currentElement != null);
         return false;
     }
+
+    public T getAt(int index) {
+        int currentIndex = 0;
+        MyLinkedListElement<T> current = first;
+        while (current != null) {
+            if (currentIndex == index) {
+                return current.getElement();
+            }
+            current = current.getNext();
+            currentIndex++;
+
+        }
+        return null;
+    }
+
     public boolean contains(T task) {
 
         if (first == null) {
