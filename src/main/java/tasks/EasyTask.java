@@ -10,4 +10,4 @@ public class EasyTask extends TaskBase{
         return 5;
     }
 }
-//comment
+//commen
