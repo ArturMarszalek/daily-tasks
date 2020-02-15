@@ -22,8 +22,17 @@ public class MyLinkedList<T> implements Iterable<T> {
         return false;
     }
 
-    public void add(int index, T taskBase) {
+    public T get(int index) {
+        int currentIndex = 0;
+        MyLinkedListElement<T> current = first;
+        while (currentIndex == index) {
+            return current.getElement();
+        }
+        return null;
+    }
 
+
+    public void add(int index, T taskBase) {
     }
 
     public boolean remove(T task) {
