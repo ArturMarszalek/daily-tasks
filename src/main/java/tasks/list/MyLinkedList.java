@@ -27,6 +27,25 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     public boolean remove(T task) {
+        if (first == null) return false;
+        MyLinkedListElement<T> currentElement = first;
+        if (task == first.getElement()) {
+            first = null;
+            last = null;
+
+        } else {
+            do {
+                if (task == currentElement.getNext().getElement() && currentElement.getNext() != last) {
+                    currentElement.setNext(currentElement.getNext().getNext());
+                } else {
+                    currentElement.setNext(null);
+                    last = currentElement;
+                }
+
+
+            } while (currentElement.getNext() != null);
+        }
+
         return false;
     }
 
