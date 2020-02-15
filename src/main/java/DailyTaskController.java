@@ -23,7 +23,7 @@ public class DailyTaskController {
     public int getTotalScoreForAllFinishedTasks() {
         int score = 0;
         for (TaskBase task: myTasks) {
-            score += task.getScore();
+            score += task.getFinishedScore();
         }
        return score;
     }

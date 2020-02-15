@@ -1,8 +1,5 @@
 package tasks.list;
 
-//import jdk.nashorn.internal.ir.LiteralNode;
-
-import javax.swing.*;
 import java.util.Iterator;
 
 public class MyLinkedList<T> implements Iterable<T> {
@@ -35,6 +32,36 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     public boolean remove(T task) {
+
+        if(first == null)
+            return false;
+
+        MyLinkedListElement<T> currentElement = first;
+        MyLinkedListElement<T> previousElement = null;
+
+        do {
+            if (task == currentElement.getElement()) {
+
+                if (currentElement == first) {
+                    first = currentElement.getNext();
+
+                    return true;
+                }
+                if (currentElement == last) {
+                    last = previousElement;
+                    previousElement.setNext(null);
+
+                    return true;
+                }
+                previousElement.setNext(currentElement.getNext());
+
+                return true;
+            }
+            previousElement = currentElement;
+            currentElement = currentElement.getNext();
+
+        } while (currentElement != null);
+
         return false;
     }
 
@@ -58,8 +85,26 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     public T get(int index) {
+
+        int currentIndex = 0;
+
+        MyLinkedListElement<T> current = first;
+
+        while (current != null) {
+
+            if(currentIndex == index) {
+
+                return current.getElement();
+            }
+
+            current = current.getNext();
+            currentIndex++;
+
+        }
+
         return null;
     }
+
 
     @Override
     public Iterator<T> iterator() {
@@ -70,7 +115,7 @@ public class MyLinkedList<T> implements Iterable<T> {
             @Override
 
             public boolean hasNext() {
-                if(currentScore == null)
+                if (currentScore == null)
                     return false;
 
                 return currentScore != last.getNext();
