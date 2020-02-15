@@ -9,8 +9,6 @@ public class MyLinkedList<T> implements Iterable<T> {
 //public class MyLinkedList<T> extends LinkedList<T> {
     private MyLinkedListElement<T> first;
     private MyLinkedListElement<T> last;
-    private MyLinkedListElement<T> next;
-
 
     public boolean add(T task) {
         MyLinkedListElement<T> myNewElement = new MyLinkedListElement<>(task);
@@ -29,6 +27,25 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     public boolean remove(T task) {
+        MyLinkedListElement<T> currentElement = first;
+        MyLinkedListElement<T> previousElement = null;
+        do {
+            if (task == currentElement.getElement()) {
+                if (currentElement == first) {
+                    first = currentElement.getNext();
+                    return true;
+                }
+                if (currentElement == last) {
+                    last = previousElement;
+                    previousElement.setNext(null);
+                    return true;
+                }
+                previousElement.setNext(currentElement.getNext());
+                return true;
+            }
+            previousElement = currentElement;
+            currentElement = currentElement.getNext();
+        } while (currentElement != null);
         return false;
     }
 
@@ -54,17 +71,19 @@ public class MyLinkedList<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            //SOMETHING TO ADD HERE?
+            MyLinkedListElement<T> nextElement = first;
+
             @Override
             public boolean hasNext() {
-                //TODO CHANGE THIS
-                return false;
+                if (nextElement == null) return false;
+                return nextElement != last.getNext();
             }
 
             @Override
             public T next() {
-                //TODO CHANGE THIS
-                return null;
+                T element = nextElement.getElement();
+                nextElement = nextElement.getNext();
+                return element;
             }
         };
     }

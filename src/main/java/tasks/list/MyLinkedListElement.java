@@ -19,7 +19,4 @@ public class MyLinkedListElement<T> {
     public T getElement() {
         return element;
     }
-
-
-
 }
