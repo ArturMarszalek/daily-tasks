@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 import tasks.EasyTask;
 import tasks.HardTask;
 import tasks.MediumTask;
+import tasks.TaskBase;
+import tasks.status.TaskStatus;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,6 +42,26 @@ class DailyTaskControllerTest {
     }
 
     @Test
+    void shouldRemoveAnyTask() {
+        //given
+        TaskBase eatBreakfast = new EasyTask("zjedz sniadanko");
+        TaskBase doNotEatSweets = new MediumTask("nie jedz słodyczy");
+        TaskBase doExercises = new HardTask("idz na silke");
+        dailyTaskController.add(eatBreakfast);
+        dailyTaskController.add(doNotEatSweets);
+        dailyTaskController.add(doExercises);
+        assertTrue(dailyTaskController.contains(eatBreakfast));
+        assertTrue(dailyTaskController.contains(doNotEatSweets));
+        assertTrue(dailyTaskController.contains(doExercises));
+        //when
+        dailyTaskController.remove(doNotEatSweets);
+        //then
+        assertTrue(dailyTaskController.contains(eatBreakfast));
+        assertFalse(dailyTaskController.contains(doNotEatSweets));
+        assertTrue(dailyTaskController.contains(doExercises));
+    }
+
+    @Test
     void shouldAddTaskAtSpecificPlace() {
         //given
         EasyTask eatBreakfast = new EasyTask("zjedz sniadanko");
@@ -57,9 +79,9 @@ class DailyTaskControllerTest {
     @Test
     void shouldCountAllPointsForFinishedTasks() {
         //given
-        EasyTask eatBreakfast = new EasyTask("zjedz sniadanko");
-        EasyTask doNotEatSweets = new MediumTask("nie jedz słodyczy");
-        EasyTask doExercises = new HardTask("idz na silke");
+        TaskBase eatBreakfast = new EasyTask("zjedz sniadanko");
+        TaskBase doNotEatSweets = new MediumTask("nie jedz słodyczy");
+        TaskBase doExercises = new HardTask("idz na silke");
         dailyTaskController.add(eatBreakfast);
         dailyTaskController.add(doNotEatSweets);
         dailyTaskController.add(doExercises);
@@ -67,6 +89,48 @@ class DailyTaskControllerTest {
         //when
         int totalScoreForAllFinishedTasks = dailyTaskController.getTotalScoreForAllFinishedTasks();
         //then
-        assertEquals(30, totalScoreForAllFinishedTasks);
+        assertEquals(0, totalScoreForAllFinishedTasks);
+    }
+
+    @Test
+    void shouldCountEmptyPointsForFinishedTasks() {
+        //given
+
+        //when
+        int totalScoreForAllFinishedTasks = dailyTaskController.getTotalScoreForAllFinishedTasks();
+        //then
+        assertEquals(0, totalScoreForAllFinishedTasks);
+    }
+
+    @Test
+    void shouldCountAllPointsForStatusFinishedTasks() {
+        //given
+        TaskBase eatBreakfast = new EasyTask("zjedz sniadanko", TaskStatus.FINISHED);
+        TaskBase doNotEatSweets = new MediumTask("nie jedz słodyczy", TaskStatus.NEW);
+        TaskBase doExercises = new HardTask("idz na silke", TaskStatus.FINISHED);
+        dailyTaskController.add(eatBreakfast);
+        dailyTaskController.add(doNotEatSweets);
+        dailyTaskController.add(doExercises);
+        //when
+        int totalScoreForAllFinishedTasks = dailyTaskController.getTotalScoreForAllFinishedTasks();
+        //then
+        assertEquals(20, totalScoreForAllFinishedTasks);
+
+    }
+
+    @Test
+    void shouldGetElement() {
+        //given
+        TaskBase eatBreakfast = new EasyTask("zjedz sniadanko", TaskStatus.FINISHED);
+        TaskBase doNotEatSweets = new MediumTask("nie jedz słodyczy", TaskStatus.NEW);
+        TaskBase doExercises = new HardTask("idz na silke", TaskStatus.FINISHED);
+        dailyTaskController.add(eatBreakfast);
+        dailyTaskController.add(doNotEatSweets);
+        dailyTaskController.add(doExercises);
+
+        //when
+        TaskBase taskBase = dailyTaskController.getAt(1);
+        assertEquals(doNotEatSweets, taskBase);
+
     }
 }
