@@ -1,8 +1,12 @@
 import tasks.TaskBase;
 import tasks.list.MyLinkedList;
 
+import java.util.LinkedList;
+
 public class DailyTaskController {
     MyLinkedList<TaskBase> myTasks = new MyLinkedList<TaskBase>();
+
+    LinkedList asdas = new LinkedList();
 
     public void add(TaskBase task) {
         myTasks.add(task);
