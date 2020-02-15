@@ -13,7 +13,6 @@ public class MyLinkedListElement<T> {
         return element;
     }
 
-
     public MyLinkedListElement<T> getNext() {
         return next;
     }
@@ -21,8 +20,6 @@ public class MyLinkedListElement<T> {
     public void setNext(MyLinkedListElement<T> next) {
         this.next = next;
     }
-
-
 
 }
 
