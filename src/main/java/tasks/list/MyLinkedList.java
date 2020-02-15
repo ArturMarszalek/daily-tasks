@@ -24,6 +24,12 @@ public class MyLinkedList<T> implements Iterable<T> {
 
     public void add(int index, T taskBase) {
 
+        MyLinkedListElement<T> previousElement = getElementAt(index - 1);
+        MyLinkedListElement<T> nextElement = getElementAt(index);
+        MyLinkedListElement<T> elementToAdd = new MyLinkedListElement<>(taskBase);
+        previousElement.setNext(elementToAdd);
+        elementToAdd.setNext(nextElement);
+
     }
 
     public boolean remove(T task) {
@@ -68,8 +74,23 @@ public class MyLinkedList<T> implements Iterable<T> {
     }
 
     public T get(int index) {
+        return getElementAt(index).getElement();
+    }
+
+    private MyLinkedListElement<T> getElementAt(int index) {
+        int currentIndex = 0;
+        MyLinkedListElement<T> current = first;
+        while (current != null) {
+            if (currentIndex == index) {
+                return current;
+            }
+
+            current = current.getNext();
+            currentIndex++;
+        }
         return null;
     }
+
 
     @Override
     public Iterator<T> iterator() {
